@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人简历</title>
+    <!-- 引入 Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: "Microsoft Yahei", sans-serif;
+        }
+        .resume-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 30px;
+        }
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #0d6efd;
+        }
+        .table th, .table td {
+            vertical-align: middle;
+        }
+        .profile-pic {
+            width: 120px;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container resume-container">
+        <h2 class="text-center mb-4">个人简历</h2>
+
+        <!-- 基本信息部分 -->
+        <h3 class="section-title"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+            <path d="M11 6a3 3 0 1 1 -6 0 3 3 0 0 1 6 0z"/>
+            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8 -7a7 7 0 0 0 -5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+        </svg> 基本信息</h3>
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <th>姓名</th>
+                    <td>李光硕</td>
+                    <th>性别</th>
+                    <td>男</td>
+                    <td rowspan="4" class="text-center">
+                        <img src="IMG_20251015_103500.jpg" alt="个人照片" class="profile-pic">
+                    </td>
+                </tr>
+                <tr>
+                    <th>出生年月</th>
+                    <td>2006.11</td>
+                    <th>政治面貌</th>
+                    <td>群众</td>
+                </tr>
+                <tr>
+                    <th>联系电话</th>
+                    <td colspan="3">18764628193</td>
+                </tr>
+                <tr>
+                    <th>电子邮箱</th>
+                    <td colspan="3">1504288511@qq.com</td>
+                </tr>
+                <tr>
+                    <th>学历</th>
+                    <td colspan="4">鲁东大学 计算机科学与技术专业 2025-2029本科毕业生</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- 项目经历部分 -->
+        <h3 class="section-title mt-4"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-briefcase" viewBox="0 0 16 16">
+            <path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v8A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5 -1.5v-8A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1h-3zm0 1h3A.5.5 0 0 1 10 2.5V3H6v-.5A.5.5 0 0 1 6.5 2zM1.5 4h13a.5.5 0 0 1 .5.5v8a.5.5 0 0 1 -.5.5h-13a.5.5 0 0 1 -.5 -.5v-8a.5.5 0 0 1 .5 -.5z"/>
+        </svg> 项目经历</h3>
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <th>蓝桥杯大赛</th>
+                    <td>本科组项目：智能校园管理系统和可视化平台</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- 自我评价部分 -->
+        <h3 class="section-title mt-4"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-left-text" viewBox="0 0 16 16">
+            <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1 -1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1 -1h12zM2 0a2 2 0 0 0 -2 2v12.793a.5.5 0 0 0 .854.353l2.853 -2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2 -2V2a2 2 0 0 0 -2 -2H2z"/>
+            <path d="M3 3.5a.5.5 0 0 1 .5 -.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 -.5 -.5zM3 6a.5.5 0 0 1 .5 -.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6zm0 2.5a.5.5 0 0 1 .5 -.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 -.5 -.5z"/>
+        </svg> 自我评价</h3>
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <td>
+                </tr>我是计算机专业本科生，我学习能力强，熟练用VS Code完成HTML/CSS/JS基础开发，能独立搭建响应式网页。曾组队获校级Web竞赛三等奖，擅长在团队中沟通协作，主动分享技术技巧。课后坚持跟进前端教程，定期复盘项目代码，对Web开发充满热情，始终以严谨态度对待学习与实践。</td>
+            </tbody>
+        </table>
+
+        <!-- 兴趣爱好部分 -->
+        <h3 class="section-title mt-4"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+            <path d="M8 2.748a.75.75 0 0 0 -1.5 0v11.518c0 .651.314 1.233.843 1.506l5.385 2.251a.75.75 0 0 0 .77 -1.243L10.894 13.846c.564 -.274.943 -.823.943 -1.401V2.748z"/>
+        </svg> 兴趣爱好</h3>
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <td>看书、打羽毛球</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- 技能证书部分 -->
+        <h3 class="section-title mt-4"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
+            <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0 -1h-5zM5 9.5a.5.5 0 0 1 .5 -.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 -.5 -.5zm0 2a.5.5 0 0 1 .5 -.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 -.5 -.5z"/>
+            <path d="M9.5 0H4a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1 -1 1H4a1 1 0 0 1 -1 -1V2a1 1 0 0 1 1 -1h5.5z"/>
+        </svg> 技能证书</h3>
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <td>
+                        <p>校级优秀学生</p>
+                        <p>校级优秀班干部</p>
+                        <p>蓝桥杯省级一等奖</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 引入 Bootstrap JS（可选，若需要交互功能可引入） -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
