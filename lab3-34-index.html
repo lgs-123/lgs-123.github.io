@@ -3,377 +3,297 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>两位数乘法计算器与点子图</title>
+    <title>文学书苑</title>
     <style>
+        /* 全局样式重置与基础设置 */
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            box-sizing: border-box;
+            font-family: "SimSun", serif;
         }
-        
         body {
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-            color: #333;
+            background-color: #f5f0e6;
+            color: #5d4037;
             line-height: 1.6;
-            min-height: 100vh;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
-        
+        /* 容器样式 */
         .container {
-            max-width: 1000px;
-            width: 100%;
-            background-color: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            padding: 30px;
-            margin: 20px 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
         }
-        
+        /* 头部样式 */
         header {
+            background-color: #8d6e63;
+            color: #fff;
+            padding: 30px 0;
             text-align: center;
-            margin-bottom: 30px;
+            border-radius: 8px 8px 0 0;
         }
-        
-        h1 {
-            color: #2575fc;
+        header h1 {
+            font-size: 2.5em;
             margin-bottom: 10px;
-            font-size: 2.5rem;
         }
-        
-        .description {
-            color: #666;
-            font-size: 1.1rem;
-            max-width: 800px;
-            margin: 0 auto 20px;
+        header p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
         }
-        
-        .input-section {
+        .quote {
+            background-color: rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            display: inline-block;
+            border-left: 3px solid #d4b996;
+        }
+        /* 导航栏样式 */
+        nav {
+            background-color: #795548;
+            padding: 15px 0;
+            text-align: center;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 1.1em;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #d4b996;
+        }
+        /* 促销栏样式 */
+        .promotion {
+            background-color: #b58863;
+            color: #fff;
+            padding: 10px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        /* 主内容区布局 */
+        .main-content {
+            display: flex;
+            gap: 20px;
+        }
+        /* 侧边栏样式 */
+        .sidebar {
+            flex: 1;
+            background-color: #f0e6d2;
+            padding: 20px;
+            border-radius: 4px;
+        }
+        .sidebar h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #d4b996;
+            padding-bottom: 5px;
+        }
+        .sidebar ul {
+            list-style: none;
+        }
+        .sidebar li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #d4b996;
+        }
+        .sidebar a {
+            color: #5d4037;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .sidebar a:hover {
+            color: #8d6e63;
+        }
+        /* 中间内容区样式 */
+        .content {
+            flex: 3;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 4px;
+        }
+        .content h2 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #d4b996;
+            padding-bottom: 5px;
+        }
+        .content h3 {
+            font-size: 1.5em;
+            margin: 20px 0 15px;
+            border-bottom: 1px solid #d4b996;
+            padding-bottom: 5px;
+        }
+        /* 书籍卡片样式 */
+        .book-cards {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
-            justify-content: center;
-            margin-bottom: 30px;
-            padding: 20px;
-            background-color: #f8f9fa;
-            border-radius: 10px;
         }
-        
-        .input-group {
+        .book-card {
+            flex: 1 1 calc(50% - 10px);
+            background-color: #f0e6d2;
+            padding: 15px;
+            border-radius: 4px;
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            gap: 15px;
         }
-        
-        .input-group label {
+        .book-card img {
+            max-width: 120px;
+            height: auto;
+            border-radius: 4px;
+        }
+        .book-info h4 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+        .book-info p {
             margin-bottom: 8px;
-            font-weight: 600;
-            color: #444;
         }
-        
-        .input-group input {
-            width: 120px;
-            padding: 12px;
-            font-size: 1.2rem;
-            text-align: center;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            transition: border-color 0.3s;
-        }
-        
-        .input-group input:focus {
-            border-color: #2575fc;
-            outline: none;
-        }
-        
-        button {
-            background: linear-gradient(to right, #2575fc, #6a11cb);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            font-size: 1.1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            margin-top: 20px;
-            font-weight: 600;
-        }
-        
-        button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .result-section {
-            margin-top: 30px;
-            padding: 20px;
-            background-color: #f8f9fa;
-            border-radius: 10px;
-        }
-        
-        .calculation-steps {
-            margin-bottom: 30px;
-            padding: 15px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-        }
-        
-        .calculation-steps h3 {
-            color: #2575fc;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 8px;
-        }
-        
-        .step {
-            margin-bottom: 15px;
-            padding: 10px;
-            background-color: #f0f7ff;
-            border-radius: 6px;
-            border-left: 4px solid #2575fc;
-        }
-        
-        .dot-diagram {
-            margin-top: 30px;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-        }
-        
-        .dot-diagram h3 {
-            color: #2575fc;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 8px;
-        }
-        
-        .dot-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        
-        .dot-row {
-            display: flex;
-            gap: 5px;
-        }
-        
-        .dot {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background-color: #2575fc;
-        }
-        
-        .dot-group {
-            margin: 15px;
-            padding: 15px;
-            border: 2px dashed #6a11cb;
-            border-radius: 8px;
-            display: inline-block;
-        }
-        
-        .dot-explanation {
-            margin-top: 15px;
-            font-style: italic;
-            color: #666;
-        }
-        
-        .final-result {
-            text-align: center;
-            font-size: 2rem;
+        .price {
+            color: #b71c1c;
             font-weight: bold;
-            color: #6a11cb;
-            margin: 20px 0;
-            padding: 15px;
-            background: linear-gradient(to right, #f0f7ff, #e6f2ff);
-            border-radius: 10px;
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                padding: 15px;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .input-section {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .dot {
-                width: 15px;
-                height: 15px;
-            }
-        }
-        
-        .error {
-            color: #e74c3c;
-            text-align: center;
+            font-size: 1.2em;
             margin-top: 10px;
-            font-weight: 600;
-            padding: 10px;
-            background-color: #ffeaea;
-            border-radius: 5px;
-            display: none;
+        }
+        .original-price {
+            font-size: 0.9em;
+            color: #757575;
+            text-decoration: line-through;
+        }
+        .discount {
+            background-color: #d4b996;
+            color: #fff;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.9em;
+            display: inline-block;
+            margin-top: 5px;
+        }
+        /* 页脚样式 */
+        footer {
+            background-color: #8d6e63;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 20px;
+            border-radius: 0 0 8px 8px;
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- 头部 -->
         <header>
-            <h1>两位数乘法计算器与点子图</h1>
-            <p class="description">输入两个两位数，查看详细的计算步骤和点子图可视化，帮助理解乘法运算过程。</p>
+            <h1>文学书苑</h1>
+            <p>探索文字之美，品味文学之韵</p>
+            <div class="quote">
+                "书籍是屹立在时间的汪洋大海中的灯塔。" — 惠普尔
+            </div>
         </header>
-        
-        <div class="input-section">
-            <div class="input-group">
-                <label for="num1">第一个两位数</label>
-                <input type="number" id="num1" min="10" max="99" placeholder="例如: 23">
-            </div>
-            
-            <div class="input-group">
-                <label for="num2">第二个两位数</label>
-                <input type="number" id="num2" min="10" max="99" placeholder="例如: 45">
-            </div>
-            
-            <button id="calculate-btn">计算</button>
-        </div>
-        
-        <div class="error" id="error-msg">请输入有效的两位数（10-99）</div>
-        
-        <div class="result-section" id="result-section" style="display: none;">
-            <div class="calculation-steps">
-                <h3>计算步骤</h3>
-                <div id="steps-container"></div>
-            </div>
-            
-            <div class="final-result" id="final-result"></div>
-            
-            <div class="dot-diagram">
-                <h3>点子图可视化</h3>
-                <div id="dot-container"></div>
-                <p class="dot-explanation">点子图将乘法分解为更小的部分，每个点代表一个单位，帮助直观理解乘法运算。</p>
-            </div>
-        </div>
-    </div>
 
-    <script>
-        document.getElementById('calculate-btn').addEventListener('click', function() {
-            const num1 = parseInt(document.getElementById('num1').value);
-            const num2 = parseInt(document.getElementById('num2').value);
-            const errorMsg = document.getElementById('error-msg');
-            const resultSection = document.getElementById('result-section');
-            
-            if (isNaN(num1) || isNaN(num2) || num1 < 10 || num1 > 99 || num2 < 10 || num2 > 99) {
-                errorMsg.style.display = 'block';
-                resultSection.style.display = 'none';
-                return;
-            }
-            
-            errorMsg.style.display = 'none';
-            resultSection.style.display = 'block';
-            
-            calculateMultiplication(num1, num2);
-            createDotDiagram(num1, num2);
-        });
-        
-        function calculateMultiplication(num1, num2) {
-            const stepsContainer = document.getElementById('steps-container');
-            const finalResult = document.getElementById('final-result');
-            
-            stepsContainer.innerHTML = '';
-            
-            const num1Tens = Math.floor(num1 / 10);
-            const num1Ones = num1 % 10;
-            const num2Tens = Math.floor(num2 / 10);
-            const num2Ones = num2 % 10;
-            
-            const part1 = num1 * num2Ones;
-            const part2 = num1 * num2Tens * 10;
-            const total = part1 + part2;
-            
-            stepsContainer.innerHTML += `
-                <div class="step">
-                    <p><strong>第一步：分解数字</strong></p>
-                    <p>${num1} = ${num1Tens} × 10 + ${num1Ones}</p>
-                    <p>${num2} = ${num2Tens} × 10 + ${num2Ones}</p>
+        <!-- 导航栏 -->
+        <nav>
+            <a href="#">首页</a>
+            <a href="#">文学经典</a>
+            <a href="#">现代文学</a>
+            <a href="#">世界文学</a>
+            <a href="#">作家专栏</a>
+            <a href="#">联系我们</a>
+        </nav>
+
+        <!-- 促销栏 -->
+        <div class="promotion">
+            本周推荐：经典文学作品限时特惠，满100减20！
+        </div>
+
+        <!-- 主内容区 -->
+        <div class="main-content">
+            <!-- 左侧边栏：文学分类 -->
+            <aside class="sidebar">
+                <h3>文学分类</h3>
+                <ul>
+                    <li><a href="#">古典文学</a></li>
+                    <li><a href="#">浪漫主义</a></li>
+                    <li><a href="#">现代主义</a></li>
+                    <li><a href="#">魔幻现实主义</a></li>
+                    <li><a href="#">戏剧文学</a></li>
+                    <li><a href="#">散文随笔</a></li>
+                </ul>
+            </aside>
+
+            <!-- 中间内容区：书籍展示 -->
+            <main class="content">
+                <h2>经典文学作品</h2>
+
+                <h3>古典文学</h3>
+                <div class="book-cards">
+                    <div class="book-card">
+                        <img src="f43c59f3d44a20ea1852a3cdc370c946.jpeg" alt="红楼梦">
+                        <div class="book-info">
+                            <h4>红楼梦</h4>
+                            <p>作者：曹雪芹</p>
+                            <p>中国古典四大名著之首，一部具有世界影响力的人情小说作品，举世公认的中国古典小说巅峰之作，中国封建社会的百科全书，传统文化的集大成者。</p>
+                            <div class="price">¥46.98</div>
+                            <div class="original-price">¥58.00</div>
+                            <div class="discount">7.9折</div>
+                        </div>
+                    </div>
+                    <div class="book-card">
+                        <img src="1761048994708.png" alt="诗经">
+                        <div class="book-info">
+                            <h4>诗经</h4>
+                            <p>作者：佚名（收集整理）</p>
+                            <p>中国第一部诗歌总集，收集了西周初年至春秋中叶（前11世纪至前6世纪）的诗歌，共311篇，反映了周初至周晚期约五百年间的社会面貌。</p>
+                            <div class="price">¥24.30</div>
+                            <div class="original-price">¥30.00</div>
+                            <div class="discount">8.1折</div>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="step">
-                    <p><strong>第二步：使用分配律</strong></p>
-                    <p>${num1} × ${num2} = (${num1Tens} × 10 + ${num1Ones}) × (${num2Tens} × 10 + ${num2Ones})</p>
-                    <p>= (${num1} × ${num2Ones}) + (${num1} × ${num2Tens} × 10)</p>
+
+                <h3>现代文学</h3>
+                <div class="book-cards">
+                    <div class="book-card">
+                        <img src="1761131233283.jpeg" alt="围城">
+                        <div class="book-info">
+                            <h4>围城</h4>
+                            <p>作者：钱钟书</p>
+                            <p>中国现代文学史上一部风格独特的讽刺小说，被誉为"新儒林外史"。小说围绕方鸿渐等知识分子的生活，揭示了人性的弱点和社会的种种弊端。</p>
+                            <div class="price">¥26.24</div>
+                            <div class="original-price">¥32.00</div>
+                            <div class="discount">8.2折</div>
+                        </div>
+                    </div>
+                    <div class="book-card">
+                        <img src="1761131257082.jpeg" alt="边城">
+                        <div class="book-info">
+                            <h4>边城</h4>
+                            <p>作者：沈从文</p>
+                            <p>以20世纪30年代川湘交界的边城小镇茶峒为背景，描绘了湘西地区特有的风土人情。小说通过少女翠翠的纯爱故事，展现了人性的善良美好与命运的无奈。</p>
+                            <div class="price">¥24.47</div>
+                            <div class="original-price">¥39.00</div>
+                            <div class="discount">7.3折</div>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="step">
-                    <p><strong>第三步：计算部分乘积</strong></p>
-                    <p>${num1} × ${num2Ones} = ${part1}</p>
-                    <p>${num1} × ${num2Tens} × 10 = ${part2}</p>
-                </div>
-                
-                <div class="step">
-                    <p><strong>第四步：相加得到最终结果</strong></p>
-                    <p>${part1} + ${part2} = ${total}</p>
-                </div>
-            `;
-            
-            finalResult.textContent = `${num1} × ${num2} = ${total}`;
-        }
-        
-        function createDotDiagram(num1, num2) {
-            const dotContainer = document.getElementById('dot-container');
-            
-            dotContainer.innerHTML = '';
-            
-            const num1Tens = Math.floor(num1 / 10);
-            const num1Ones = num1 % 10;
-            const num2Tens = Math.floor(num2 / 10);
-            const num2Ones = num2 % 10;
-            
-            let diagramHTML = `
-                <p>点子图将 ${num1} × ${num2} 分解为四个部分：</p>
-                <div class="dot-container">
-            `;
-            
-            const parts = [
-                { label: `${num1Tens}×${num2Tens}`, value: num1Tens * num2Tens, color: '#2575fc' },
-                { label: `${num1Tens}×${num2Ones}`, value: num1Tens * num2Ones, color: '#6a11cb' },
-                { label: `${num1Ones}×${num2Tens}`, value: num1Ones * num2Tens, color: '#3498db' },
-                { label: `${num1Ones}×${num2Ones}`, value: num1Ones * num2Ones, color: '#9b59b6' }
-            ];
-            
-            parts.forEach(part => {
-                diagramHTML += `<div class="dot-group">`;
-                diagramHTML += `<p><strong>${part.label} = ${part.value}</strong></p>`;
-                
-                for (let i = 0; i < Math.min(part.value, 100); i++) {
-                    if (i % 10 === 0) diagramHTML += `<div class="dot-row">`;
-                    diagramHTML += `<div class="dot" style="background-color: ${part.color}"></div>`;
-                    if ((i + 1) % 10 === 0) diagramHTML += `</div>`;
-                }
-                
-                if (part.value > 100) {
-                    diagramHTML += `<p>... (还有 ${part.value - 100} 个点)</p>`;
-                }
-                
-                diagramHTML += `</div>`;
-            });
-            
-            diagramHTML += `</div>`;
-            
-            dotContainer.innerHTML = diagramHTML;
-        }
-    </script>
+            </main>
+
+            <!-- 右侧边栏：文学大师 -->
+            <aside class="sidebar">
+                <h3>文学大师</h3>
+                <ul>
+                    <li><a href="#">鲁迅</a></li>
+                    <li><a href="#">老舍</a></li>
+                    <li><a href="#">巴金</a></li>
+                    <li><a href="#">茅盾</a></li>
+                    <li><a href="#">沈从文</a></li>
+                </ul>
+            </aside>
+        </div>
+
+        <!-- 页脚 -->
+        <footer>
+            <p>文学书苑</p>
+            <p>地址：北京市东城区文学路123号 | 电话：010-12345678</p>
+        </footer>
+    </div>
 </body>
 </html>
