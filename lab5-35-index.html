@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>满屏暖心标签</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Microsoft YaHei', '微软雅黑', sans-serif;
+            background: #f9f9f9;
+        }
+
+        .tag {
+            position: absolute;
+            padding: 12px 24px;
+            border-radius: 8px;
+            background: var(--tag-color);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px) scale(0.9);
+            animation: fadeInUp 0.4s forwards;
+            user-select: none;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* 结尾提示：更大、更醒目、完全居中 */
+        #end-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) translateY(20px) scale(0.9);
+            padding: 36px 72px; /* 大幅增加内边距 */
+            border-radius: 20px; /* 更大圆角 */
+            background: #fff3cd;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* 更柔和的阴影 */
+            font-size: 48px; /* 显著放大字体 */
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+            opacity: 0;
+            display: none;
+            animation: fadeInUp 0.8s forwards; /* 稍慢的动画，更有仪式感 */
+            z-index: 1000;
+            min-width: 300px; /* 确保在小屏幕上也不会太窄 */
+        }
+    </style>
+</head>
+<body>
+    <div id="end-message">天天开心</div>
+
+    <script>
+        const tips = [
+            '多喝口水哦', '保持微笑呀', '每天都要元气满满',
+            '记得吃水果', '保持好心情', '好好爱自己', '我想你了',
+            '梦想成真', '期待下一次见面', '金榜题名',
+            '顺顺利利', '早点休息', '愿所有烦恼都消失',
+            '别熬夜', '今天过得开心嘛', '天冷了，多穿衣服',
+            '你真的很棒', '加油，你可以的', '阳光总在风雨后',
+            '慢慢来，别急', '今天也是美好的一天', '被爱包围着',
+            '别忘了给自己一个拥抱', '小确幸就在身边', '一切都会好起来',
+            '做自己喜欢的事', '累了就歇一歇', '世界因你而美好',
+            '心怀希望，未来可期', '平安喜乐，万事顺遂'
+        ];
+
+        const tagColors = [
+            '#fff3cd', '#ffeeba', '#d1ecf1', '#c3e6cb',
+            '#d4edda', '#f8d7da', '#f5c6c6', '#e2d5f8',
+            '#f0e6ff', '#fff0f5', '#e6f7ff', '#faf0e6'
+        ];
+
+        const maxTags = 100;
+        let createdCount = 0;
+        let activeTags = 0;
+
+        function createTag() {
+            if (createdCount >= maxTags) return;
+
+            const tag = document.createElement('div');
+            tag.className = 'tag';
+
+            const tip = tips[Math.floor(Math.random() * tips.length)];
+            const color = tagColors[Math.floor(Math.random() * tagColors.length)];
+
+            tag.textContent = tip;
+            tag.style.setProperty('--tag-color', color);
+
+            const screenWidth = window.innerWidth;
+            const screenHeight = window.innerHeight;
+            const tagWidth = tip.length * 16 + 48;
+            const tagHeight = 44;
+
+            const x = Math.floor(Math.random() * (screenWidth - tagWidth));
+            const y = Math.floor(Math.random() * (screenHeight - tagHeight));
+
+            tag.style.left = `${x}px`;
+            tag.style.top = `${y}px`;
+
+            setTimeout(() => {
+                tag.style.opacity = 0;
+                tag.style.transform = 'translateY(20px) scale(0.9)';
+                setTimeout(() => tag.remove(), 300);
+                activeTags--;
+                checkIfAllClosed();
+            }, 3000);
+
+            document.body.appendChild(tag);
+            createdCount++;
+            activeTags++;
+
+            if (createdCount < maxTags) {
+                setTimeout(createTag, 60);
+            }
+        }
+
+        function checkIfAllClosed() {
+            if (createdCount >= maxTags && activeTags === 0) {
+                const endMsg = document.getElementById('end-message');
+                const randomColor = tagColors[Math.floor(Math.random() * tagColors.length)];
+                endMsg.style.background = randomColor;
+                endMsg.style.display = 'block';
+
+                setTimeout(() => {
+                    endMsg.style.opacity = 0;
+                    endMsg.style.transform = 'translate(-50%, -50%) translateY(20px) scale(0.9)';
+                    setTimeout(() => endMsg.remove(), 300);
+                }, 4000); // 延长显示时间到 4 秒，让用户更清楚看到
+            }
+        }
+
+        createTag();
+    </script>
+</body>
+</html>
