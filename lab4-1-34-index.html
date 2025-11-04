@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>焕新数字图书展销平台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "PingFang SC", "Microsoft Yahei", sans-serif;
+        }
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+        }
+        /* 头部导航 */
+        .header {
+            background-color: #4a6fa5;
+            padding: 15px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .nav .logo {
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .nav .menu {
+            display: flex;
+            gap: 25px;
+        }
+        .nav .menu a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+        .nav .menu a:hover {
+            color: #ffd700;
+        }
+        .nav .user-area {
+            display: flex;
+            gap: 15px;
+        }
+        .nav .user-area button {
+            background: transparent;
+            border: 1px solid #fff;
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .nav .user-area button:hover {
+            background-color: #fff;
+            color: #4a6fa5;
+        }
+        /* 主体布局 */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            display: grid;
+            grid-template-columns: 220px 1fr 300px;
+            gap: 20px;
+        }
+        /* 左侧分类导航 */
+        .sidebar {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            padding: 20px;
+        }
+        .sidebar h3 {
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            color: #4a6fa5;
+        }
+        .sidebar ul {
+            list-style: none;
+        }
+        .sidebar ul li {
+            margin-bottom: 10px;
+        }
+        .sidebar ul li a {
+            color: #555;
+            text-decoration: none;
+            display: block;
+            padding: 6px 0;
+            transition: color 0.3s;
+        }
+        .sidebar ul li a:hover {
+            color: #4a6fa5;
+            padding-left: 5px;
+        }
+        /* 主内容区 */
+        .main {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            padding: 20px;
+        }
+        /* 搜索栏 */
+        .search-bar {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        .search-bar input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .search-bar button {
+            background-color: #4a6fa5;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 0 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .search-bar button:hover {
+            background-color: #3a5a85;
+        }
+        /* 轮播区域 */
+        .banner {
+            position: relative;
+            height: 280px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .banner .promo-text {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .banner .promo-text h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        .banner .promo-text p {
+            font-size: 16px;
+        }
+        /* 筛选栏 */
+        .filter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .filter button {
+            background-color: #f0f2f5;
+            border: none;
+            border-radius: 20px;
+            padding: 6px 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .filter button.active, .filter button:hover {
+            background-color: #4a6fa5;
+            color: #fff;
+        }
+        /* 新书上市 */
+        .new-books {
+            margin-bottom: 20px;
+        }
+        .new-books h3 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            color: #4a6fa5;
+        }
+        .new-books h3 a {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .books-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+        }
+        .book-item {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        .book-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .book-item .book-img {
+            height: 240px;
+            overflow: hidden;
+        }
+        .book-item .book-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        .book-item:hover .book-img img {
+            transform: scale(1.05);
+        }
+        .book-item .book-info {
+            padding: 10px;
+        }
+        .book-item .book-info h4 {
+            margin-bottom: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .book-item .book-info .price {
+            color: #e63946;
+            font-weight: bold;
+            margin-top: 8px;
+            display: block;
+        }
+        /* 右侧优惠栏 */
+        .discount {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            padding: 20px;
+        }
+        .discount h3 {
+            color: #e63946;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .discount ul {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        .discount ul li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+        }
+        .discount ul li .icon {
+            color: #e63946;
+            margin-right: 5px;
+        }
+        .discount .promo-book {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .discount .promo-book img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .discount .promo-book .info {
+            padding: 10px;
+        }
+        .discount .promo-book .info .price {
+            color: #e63946;
+            font-weight: bold;
+            display: block;
+            margin-top: 5px;
+        }
+        .discount .promo-book .info .origin-price {
+            font-size: 12px;
+            color: #999;
+            text-decoration: line-through;
+            margin-left: 5px;
+        }
+        /* 图书详情弹窗 */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal .modal-content {
+            background-color: #fff;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 20px;
+            position: relative;
+        }
+        .modal .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            color: #999;
+            cursor: pointer;
+        }
+        .modal .book-detail {
+            display: flex;
+            gap: 20px;
+        }
+        .modal .book-detail .detail-img {
+            flex: 0 0 250px;
+        }
+        .modal .book-detail .detail-img img {
+            width: 100%;
+            border-radius: 4px;
+        }
+        .modal .book-detail .detail-info {
+            flex: 1;
+        }
+        .modal .book-detail .detail-info h2 {
+            margin-bottom: 10px;
+            color: #4a6fa5;
+        }
+        .modal .book-detail .detail-info .author {
+            color: #666;
+            margin-bottom: 15px;
+            display: block;
+        }
+        .modal .book-detail .detail-info .price {
+            color: #e63946;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: block;
+        }
+        .modal .book-detail .detail-info .desc {
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .modal .book-detail .detail-info .buy-btn {
+            background-color: #e63946;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .modal .book-detail .detail-info .buy-btn:hover {
+            background-color: #c92a37;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="nav">
+            <div class="logo">焕新图书</div>
+            <div class="menu">
+                <a href="#">首页</a>
+                <a href="#">小说</a>
+                <a href="#">科技</a>
+                <a href="#">历史</a>
+                <a href="#">文学</a>
+            </div>
+            <div class="user-area">
+                <button>登录</button>
+                <button>注册</button>
+                <button>购物车</button>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="sidebar">
+            <h3>图书分类导航</h3>
+            <ul>
+                <li><a href="#">小说 <span>(1200+)</span></a></li>
+                <li><a href="#">历史 <span>(800+)</span></a></li>
+                <li><a href="#">文学 <span>(950+)</span></a></li>
+                <li><a href="#">艺术 <span>(600+)</span></a></li>
+                <li><a href="#">哲学 <span>(400+)</span></a></li>
+                <li><a href="#">科技 <span>(1500+)</span></a></li>
+                <li><a href="#">经济 <span>(700+)</span></a></li>
+                <li><a href="#">教育 <span>(500+)</span></a></li>
+                <li><a href="#">医学 <span>(300+)</span></a></li>
+                <li><a href="#">军事 <span>(450+)</span></a></li>
+            </ul>
+        </div>
+        <div class="main">
+            <div class="search-bar">
+                <input type="text" placeholder="搜索图书名称、作者...">
+                <button>搜索</button>
+            </div>
+            <div class="banner">
+                <img src="https://picsum.photos/800/280?random=10" alt="图书促销 banner">
+                <div class="promo-text">
+                    <h2>书香节狂欢</h2>
+                    <p>全场图书5折起，满200减100，限时3天！</p>
+                </div>
+            </div>
+            <div class="filter">
+                <button class="active">按分类筛选</button>
+                <button>按价格筛选</button>
+                <button>按评分筛选</button>
+                <button>按销量筛选</button>
+            </div>
+            <div class="new-books">
+                <h3>新书上市 <a href="#">查看更多→</a></h3>
+                <div class="books-list">
+                    <div class="book-item" data-book="1">
+                        <div class="book-img">
+                            <img src="https://picsum.photos/200/300?random=1" alt="Web开发书籍">
+                        </div>
+                        <div class="book-info">
+                            <h4>零基础入门学习Web开发</h4>
+                            <span class="price">¥59.00</span>
+                        </div>
+                    </div>
+                    <div class="book-item" data-book="2">
+                        <div class="book-img">
+                            <img src="https://picsum.photos/200/300?random=2" alt="设计思维书籍">
+                        </div>
+                        <div class="book-info">
+                            <h4>设计思维工具手册</h4>
+                            <span class="price">¥45.00</span>
+                        </div>
+                    </div>
+                    <div class="book-item" data-book="3">
+                        <div class="book-img">
+                            <img src="https://picsum.photos/200/300?random=3" alt="数据分析书籍">
+                        </div>
+                        <div class="book-info">
+                            <h4>数据分析基础与案例实战</h4>
+                            <span class="price">¥68.00</span>
+                        </div>
+                    </div>
+                    <div class="book-item" data-book="4">
+                        <div class="book-img">
+                            <img src="https://picsum.photos/200/300?random=4" alt="历史书籍">
+                        </div>
+                        <div class="book-info">
+                            <h4>全球通史：从史前到现代</h4>
+                            <span class="price">¥79.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="discount">
+            <h3>活动期间优惠</h3>
+            <ul>
+                <li><span class="icon">★</span>全场图书满100减30,满200减80,多买多减</li>
+                <li><span class="icon">★</span>新用户注册即送20元优惠券,可叠加使用</li>
+                <li><span class="icon">★</span>每日签到领取积分,积分可兑换图书</li>
+                <li><span class="icon">★</span>会员专享8折优惠,还可参与限量秒杀</li>
+                <li><span class="icon">★</span>购买套装图书额外赠送精美书签</li>
+            </ul>
+            <div class="promo-book" data-book="5">
+                <img src="https://picsum.photos/200/300?random=5" alt="瓦尔登湖促销">
+                <div class="info">
+                    <h4>瓦尔登湖</h4>
+                    <span class="price">¥2.98</span>
+                    <span class="origin-price">¥8.80</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 图书详情弹窗 -->
+    <div class="modal" id="bookModal">
+        <div class="modal-content">
+            <div class="close-btn" id="closeModal">×</div>
+            <div class="book-detail" id="bookDetail">
+                <!-- 详情内容由JS动态填充 -->
+            </div>
+        </div>
+    </div>
+    <script>
+        // 图书数据（模拟）
+        const bookData = {
+            1: {
+                title: "零基础入门学习Web开发",
+                author: "张三",
+                price: "¥59.00",
+                desc: "本书从HTML、CSS基础开始，逐步深入到JavaScript、React等前端技术，通过大量实战案例帮助零基础读者快速掌握Web开发技能。适合大学生、转行人员及编程爱好者阅读。",
+                img: "https://picsum.photos/200/300?random=1"
+            },
+            2: {
+                title: "设计思维工具手册",
+                author: "李四",
+                price: "¥45.00",
+                desc: "设计思维是创新的核心方法，本书系统介绍了设计思维的五大阶段及常用工具，通过企业案例解析如何运用设计思维解决商业问题，提升产品竞争力。",
+                img: "https://picsum.photos/200/300?random=2"
+            },
+            3: {
+                title: "数据分析基础与案例实战",
+                author: "王五",
+                price: "¥68.00",
+                desc: "涵盖Python数据分析库（Pandas、Matplotlib等）的使用方法，结合电商、金融等行业案例，讲解数据清洗、可视化、建模全流程，让读者具备实战能力。",
+                img: "https://picsum.photos/200/300?random=3"
+            },
+            4: {
+                title: "全球通史：从史前到现代",
+                author: "赵六",
+                price: "¥79.00",
+                desc: "以全球视角梳理人类文明发展脉络，分析各大文明的兴衰与互动，帮助读者理解历史规律与当代世界格局的形成，是一部兼具学术性与可读性的通史著作。",
+                img: "https://picsum.photos/200/300?random=4"
+            },
+            5: {
+                title: "瓦尔登湖",
+                author: "梭罗",
+                price: "¥2.98",
+                desc: "梭罗独居瓦尔登湖畔两年的生活记录，探讨自然、简朴与精神自由的关系，文字清新隽永，充满哲思，是美国文学及自然主义的经典之作。",
+                img: "https://picsum.photos/200/300?random=5"
+            }
+        };
+
+        // 打开图书详情弹窗
+        function openBookModal(bookId) {
+            const modal = document.getElementById('bookModal');
+            const detailContainer = document.getElementById('bookDetail');
+            const book = bookData[bookId];
+            if (book) {
+                detailContainer.innerHTML = `
+                    <div class="detail-img">
+                        <img src="${book.img}" alt="${book.title}">
+                    </div>
+                    <div class="detail-info">
+                        <h2>${book.title}</h2>
+                        <span class="author">作者：${book.author}</span>
+                        <span class="price">${book.price}</span>
+                        <p class="desc">${book.desc}</p>
+                        <button class="buy-btn">加入购物车</button>
+                    </div>
+                `;
+                modal.classList.add('active');
+            }
+        }
+
+        // 关闭图书详情弹窗
+        function closeBookModal() {
+            document.getElementById('bookModal').classList.remove('active');
+        }
+
+        // 绑定图书点击事件
+        document.querySelectorAll('.book-item, .promo-book').forEach(item => {
+            item.addEventListener('click', () => {
+                const bookId = item.getAttribute('data-book');
+                openBookModal(bookId);
+            });
+        });
+
+        // 绑定关闭按钮事件
+        document.getElementById('closeModal').addEventListener('click', closeBookModal);
+
+        // 点击弹窗外部关闭
+        document.getElementById('bookModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('bookModal')) {
+                closeBookModal();
+            }
+        });
+
+        // 筛选按钮切换效果
+        document.querySelectorAll('.filter button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter button').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
