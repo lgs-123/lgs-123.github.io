@@ -1,66 +1,53 @@
-* {
+
+        /* 全局样式 */
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: "PingFang SC", "Microsoft Yahei", sans-serif;
+            font-family: "微软雅黑", sans-serif;
         }
         body {
             background-color: #f5f7fa;
-            color: #333;
-            line-height: 1.6;
         }
-        /* 头部导航 */
+
+        /* 顶部导航栏 */
         .header {
-            background-color: #4a6fa5;
-            padding: 15px 0;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            background-color: #2c3e50;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
         .nav {
+            padding: 15px 50px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
         }
-        .nav .logo {
-            color: #fff;
+        .logo {
+            color: white;
             font-size: 24px;
             font-weight: bold;
         }
-        .nav .menu {
-            display: flex;
-            gap: 25px;
-        }
-        .nav .menu a {
-            color: #fff;
+        .menu a {
+            color: white;
             text-decoration: none;
+            margin: 0 15px;
             font-size: 16px;
             transition: color 0.3s;
         }
-        .nav .menu a:hover {
-            color: #ffd700;
+        .menu a:hover {
+            color: #3498db;
         }
-        .nav .user-area {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-        .nav .user-area button {
-            background: transparent;
-            border: 1px solid #fff;
-            color: #fff;
-            padding: 6px 12px;
-            border-radius: 4px;
+        .user-area button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            background-color: #3498db;
             cursor: pointer;
-            transition: all 0.3s;
+            margin-left: 10px;
+            transition: background-color 0.3s;
         }
-        .nav .user-area button:hover {
-            background-color: #fff;
-            color: #4a6fa5;
+        .user-area button:hover {
+            background-color: #2980b9;
         }
         .cart-btn {
             position: relative;
@@ -69,391 +56,343 @@
             position: absolute;
             top: -5px;
             right: -5px;
-            background-color: #e63946;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #e74c3c;
             color: white;
             font-size: 12px;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-        
+
         /* 购物车弹窗 */
         .cart-modal {
             position: fixed;
             top: 0;
-            right: -400px;
-            width: 380px;
-            height: 100%;
+            right: 0;
+            width: 400px;
+            height: 100vh;
             background-color: white;
-            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-            transition: right 0.3s ease;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+            transform: translateX(100%);
+            transition: transform 0.3s;
+            z-index: 100;
             padding: 20px;
             overflow-y: auto;
         }
         .cart-modal.active {
-            right: 0;
+            transform: translateX(0);
+        }
+        .close-cart {
+            font-size: 24px;
+            cursor: pointer;
+            text-align: right;
+            color: #7f8c8d;
         }
         .cart-modal h3 {
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #eee;
+            margin: 10px 0 20px;
+            color: #2c3e50;
         }
-        .cart-items {
-            margin-bottom: 20px;
+        .empty-cart {
+            text-align: center;
+            padding: 30px 0;
+            color: #7f8c8d;
         }
         .cart-item {
             display: flex;
-            gap: 15px;
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ecf0f1;
         }
         .cart-item img {
             width: 60px;
             height: 80px;
             object-fit: cover;
+            margin-right: 15px;
         }
-        .cart-item-info {
-            flex: 1;
+        .cart-item-info h4 {
+            color: #2c3e50;
+            font-size: 14px;
+            margin-bottom: 5px;
         }
         .cart-item-price {
-            color: #e63946;
-            font-weight: bold;
+            color: #7f8c8d;
+            font-size: 13px;
         }
         .cart-item-remove {
-            color: #999;
+            margin-left: auto;
+            color: #e74c3c;
             cursor: pointer;
-            align-self: center;
-        }
-        .cart-item-remove:hover {
-            color: #e63946;
+            font-size: 18px;
         }
         .cart-total {
-            display: flex;
-            justify-content: space-between;
-            font-size: 18px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #2c3e50;
+            text-align: right;
+            font-size: 16px;
             font-weight: bold;
-            margin-bottom: 20px;
+            color: #2c3e50;
         }
         .checkout-btn {
             width: 100%;
-            background-color: #e63946;
-            color: white;
-            border: none;
+            margin-top: 20px;
             padding: 12px;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s;
+            background-color: #27ae60;
         }
         .checkout-btn:hover {
-            background-color: #c92a37;
-        }
-        .close-cart {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            font-size: 20px;
-            cursor: pointer;
-            color: #999;
-        }
-        .close-cart:hover {
-            color: #333;
-        }
-        .empty-cart {
-            text-align: center;
-            padding: 40px 0;
-            color: #999;
+            background-color: #2ecc71;
         }
 
-        /* 主体布局 - 调整为更合理的比例 */
+        /* 容器布局 */
         .container {
             max-width: 1200px;
-            margin: 20px auto;
+            margin: 30px auto;
             display: grid;
-            grid-template-columns: 180px 1fr 280px; /* 左侧宽度减小，右侧略窄 */
-            gap: 25px; /* 增加间距提升呼吸感 */
+            grid-template-columns: 200px 1fr 250px;
+            gap: 20px;
             padding: 0 20px;
         }
 
-        /* 左侧分类导航 - 删除数字并优化样式 */
+        /* 侧边栏 */
         .sidebar {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-            padding: 20px 15px; /* 减少内边距 */
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 20px;
         }
         .sidebar h3 {
+            color: #2c3e50;
             margin-bottom: 15px;
             padding-bottom: 10px;
-            border-bottom: 1px solid #eee;
-            color: #4a6fa5;
-            font-size: 18px;
-            padding-left: 5px; /* 增加左内边距对齐 */
+            border-bottom: 1px solid #ecf0f1;
         }
         .sidebar ul {
             list-style: none;
         }
-        .sidebar ul li {
-            margin-bottom: 8px; /* 减小间距 */
+        .sidebar li {
+            margin-bottom: 10px;
         }
-        .sidebar ul li a {
-            color: #555;
+        .sidebar a {
+            color: #34495e;
             text-decoration: none;
-            display: block;
-            padding: 8px 10px; /* 增加点击区域 */
-            border-radius: 4px; /* 增加圆角 */
-            transition: all 0.3s; /* 整体过渡效果 */
+            transition: color 0.3s;
         }
-        .sidebar ul li a:hover {
-            color: #4a6fa5;
-            background-color: #f0f5f9; /* 增加hover背景色 */
-            padding-left: 12px;
+        .sidebar a:hover {
+            color: #3498db;
         }
 
         /* 主内容区 */
         .main {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-            padding: 25px; /* 增加内边距提升内容呼吸感 */
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 20px;
         }
-
-        /* 搜索栏 */
         .search-bar {
-            margin-bottom: 25px; /* 增加间距 */
             display: flex;
-            gap: 10px;
+            margin-bottom: 20px;
         }
         .search-bar input {
             flex: 1;
-            padding: 12px 15px; /* 增加输入框高度 */
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
+            padding: 10px;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px 0 0 5px;
+            font-size: 14px;
         }
         .search-bar button {
-            background-color: #4a6fa5;
-            color: #fff;
+            padding: 10px 20px;
             border: none;
-            border-radius: 4px;
-            padding: 0 20px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 0 5px 5px 0;
             cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .search-bar button:hover {
-            background-color: #3a5a85;
         }
         .search-results {
-            margin: 20px 0;
-            padding: 15px;
-            background-color: #f8f9fa;
-            border-radius: 4px;
             display: none;
+            padding: 10px;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+            margin-bottom: 20px;
         }
         .search-results.active {
             display: block;
         }
+        .search-results span {
+            color: #e74c3c;
+            font-weight: bold;
+        }
 
-        /* 轮播区域 */
+        /* 轮播图 */
         .banner {
             position: relative;
-            height: 300px; /* 增加轮播高度 */
-            border-radius: 8px;
+            margin-bottom: 20px;
+            border-radius: 10px;
             overflow: hidden;
-            margin-bottom: 25px; /* 增加间距 */
         }
         .banner-slides {
             display: flex;
-            height: 100%;
-            transition: transform 0.5s ease;
+            transition: transform 0.5s;
         }
         .banner-slide {
             min-width: 100%;
-            height: 100%;
             position: relative;
         }
         .banner-slide img {
             width: 100%;
-            height: 100%;
+            height: 300px;
             object-fit: cover;
         }
-        .banner .promo-text {
+        .promo-text {
             position: absolute;
-            bottom: 20px;
-            left: 20px;
-            color: #fff;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            top: 50%;
+            left: 50px;
+            transform: translateY(-50%);
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
-        .banner .promo-text h2 {
-            font-size: 28px;
+        .promo-text h2 {
+            font-size: 32px;
             margin-bottom: 10px;
-        }
-        .banner .promo-text p {
-            font-size: 16px;
         }
         .banner-controls {
             position: absolute;
-            bottom: 15px;
-            right: 15px;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
             gap: 10px;
         }
         .banner-dot {
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.5);
+            background-color: rgba(255,255,255,0.5);
             cursor: pointer;
-            transition: background-color 0.3s;
         }
         .banner-dot.active {
-            background-color: #fff;
+            background-color: white;
         }
 
         /* 筛选栏 */
         .filter {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #eee;
+            gap: 10px;
+            margin-bottom: 20px;
         }
         .filter button {
-            background-color: #f0f2f5;
+            padding: 8px 15px;
             border: none;
+            background-color: #ecf0f1;
             border-radius: 20px;
-            padding: 8px 18px; /* 增加按钮大小 */
             cursor: pointer;
             transition: all 0.3s;
         }
         .filter button.active, .filter button:hover {
-            background-color: #4a6fa5;
-            color: #fff;
+            background-color: #3498db;
+            color: white;
         }
 
-        /* 新书上市 */
-        .new-books {
-            margin-bottom: 30px; /* 增加底部间距 */
-        }
+        /* 图书列表 */
         .new-books h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px; /* 增加标题下间距 */
-            color: #4a6fa5;
-            font-size: 20px;
         }
-        .new-books h3 a {
-            color: #666;
+        .new-books a {
+            color: #3498db;
             text-decoration: none;
             font-size: 14px;
         }
         .books-list {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 25px; /* 增加书籍间距 */
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
         }
         .book-item {
-            border: 1px solid #eee;
-            border-radius: 8px;
-            overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
             cursor: pointer;
+            transition: transform 0.3s;
         }
         .book-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
-        .book-item .book-img {
-            height: 240px;
-            overflow: hidden;
-        }
-        .book-item .book-img img {
+        .book-img img {
             width: 100%;
-            height: 100%;
+            height: 280px;
             object-fit: cover;
-            transition: transform 0.5s;
+            border-radius: 5px;
         }
-        .book-item:hover .book-img img {
-            transform: scale(1.05);
+        .book-info {
+            padding: 10px 0;
         }
-        .book-item .book-info {
-            padding: 15px 10px; /* 增加内边距 */
-        }
-        .book-item .book-info h4 {
-            margin-bottom: 8px;
-            white-space: nowrap;
+        .book-info h4 {
+            color: #2c3e50;
+            font-size: 16px;
+            margin-bottom: 5px;
             overflow: hidden;
             text-overflow: ellipsis;
-            font-size: 16px;
+            white-space: nowrap;
         }
-        .book-item .book-info .price {
-            color: #e63946;
+        .price {
+            color: #e74c3c;
             font-weight: bold;
-            margin-top: 8px;
-            display: block;
         }
 
-        /* 右侧优惠栏 */
+        /* 优惠栏 */
         .discount {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             padding: 20px;
         }
         .discount h3 {
-            color: #e63946;
+            color: #2c3e50;
             margin-bottom: 15px;
             padding-bottom: 10px;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #ecf0f1;
         }
         .discount ul {
             list-style: none;
-            margin-bottom: 25px; /* 增加间距 */
+            margin-bottom: 20px;
         }
-        .discount ul li {
-            margin-bottom: 12px; /* 增加列表项间距 */
+        .discount li {
+            margin-bottom: 10px;
+            color: #34495e;
             display: flex;
-            align-items: flex-start;
-            line-height: 1.5;
+            align-items: center;
         }
-        .discount ul li .icon {
-            color: #e63946;
-            margin-right: 5px;
+        .icon {
+            color: #f39c12;
+            margin-right: 10px;
         }
-        .discount .promo-book {
-            border: 1px solid #eee;
-            border-radius: 8px;
-            overflow: hidden;
+        .promo-book {
             cursor: pointer;
-            transition: box-shadow 0.3s;
+            display: flex;
+            align-items: center;
+            border: 1px solid #ecf0f1;
+            border-radius: 5px;
+            padding: 10px;
         }
-        .discount .promo-book:hover {
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-        }
-        .discount .promo-book img {
-            width: 100%;
-            height: 200px;
+        .promo-book img {
+            width: 80px;
+            height: 120px;
             object-fit: cover;
+            margin-right: 10px;
         }
-        .discount .promo-book .info {
-            padding: 12px;
+        .promo-book .info h4 {
+            color: #2c3e50;
+            margin-bottom: 5px;
         }
-        .discount .promo-book .info .price {
-            color: #e63946;
-            font-weight: bold;
-            display: block;
-            margin-top: 5px;
-        }
-        .discount .promo-book .info .origin-price {
-            font-size: 12px;
-            color: #999;
+        .origin-price {
             text-decoration: line-through;
+            color: #7f8c8d;
+            font-size: 12px;
             margin-left: 5px;
         }
 
@@ -463,95 +402,143 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
+            height: 100vh;
+            background-color: rgba(0,0,0,0.5);
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 999;
+            z-index: 200;
             opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s, visibility 0.3s;
+            pointer-events: none;
+            transition: opacity 0.3s;
         }
         .modal.active {
             opacity: 1;
-            visibility: visible;
+            pointer-events: auto;
         }
-        .modal .modal-content {
-            background-color: #fff;
-            border-radius: 8px;
-            width: 80%;
-            max-width: 800px;
-            max-height: 80vh;
+        .modal-content {
+            background-color: white;
+            border-radius: 10px;
+            width: 800px;
+            max-width: 90%;
+            max-height: 90vh;
             overflow-y: auto;
-            padding: 25px; /* 增加内边距 */
             position: relative;
         }
-        .modal .close-btn {
+        .close-btn {
             position: absolute;
             top: 15px;
             right: 15px;
             font-size: 24px;
-            color: #999;
             cursor: pointer;
+            color: #7f8c8d;
         }
-        .modal .book-detail {
+        .book-detail {
             display: flex;
-            gap: 25px; /* 增加间距 */
+            padding: 30px;
         }
-        .modal .book-detail .detail-img {
-            flex: 0 0 250px;
+        .detail-img img {
+            width: 200px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 30px;
         }
-        .modal .book-detail .detail-img img {
-            width: 100%;
-            border-radius: 4px;
-        }
-        .modal .book-detail .detail-info {
-            flex: 1;
-        }
-        .modal .book-detail .detail-info h2 {
+        .detail-info h2 {
+            color: #2c3e50;
             margin-bottom: 10px;
-            color: #4a6fa5;
         }
-        .modal .book-detail .detail-info .author {
-            color: #666;
-            margin-bottom: 15px;
+        .detail-info .author {
             display: block;
-        }
-        .modal .book-detail .detail-info .price {
-            color: #e63946;
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            display: block;
-        }
-        .modal .book-detail .detail-info .desc {
-            line-height: 1.8; /* 增加行高提升可读性 */
+            color: #7f8c8d;
             margin-bottom: 20px;
         }
-        .modal .book-detail .detail-info .buy-btn {
-            background-color: #e63946;
-            color: #fff;
+        .detail-info .price {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .detail-info .desc {
+            color: #34495e;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .buy-btn {
+            padding: 12px 25px;
+            background-color: #3498db;
+            color: white;
             border: none;
-            border-radius: 4px;
-            padding: 12px 25px; /* 增加按钮大小 */
-            font-size: 16px;
+            border-radius: 5px;
             cursor: pointer;
+            font-size: 16px;
             transition: background-color 0.3s;
         }
-        .modal .book-detail .detail-info .buy-btn:hover {
-            background-color: #c92a37;
+        .buy-btn:hover {
+            background-color: #2980b9;
         }
 
-        /* 响应式调整 */
-        @media (max-width: 992px) {
-            .container {
-                grid-template-columns: 1fr;
-            }
-            .sidebar, .discount {
-                display: none;
-            }
-            .books-list {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            }
+        /* 新增：表单模块样式（实验要求） */
+        .form-section {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-top: 20px;
         }
+        .form-section h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+        .form-group label {
+            margin-bottom: 8px;
+            color: #34495e;
+            font-weight: 500;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            padding: 10px;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+        }
+        .radio-group, .checkbox-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 5px;
+        }
+        .form-btn-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .form-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .btn-submit {
+            background-color: #27ae60;
+            color: white;
+        }
+        .btn-reset {
+            background-color: #e74c3c;
+            color: white;
+        }
+        ::placeholder {
+            color: #95a5a6;
+            font-style: italic;
+        }
+    
