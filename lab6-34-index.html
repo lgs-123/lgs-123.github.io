@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>焕新数字图书展销平台</title>
+     <link rel="stylesheet" href="2.css">
+</head>
+<body>
+    <div class="header">
+        <div class="nav">
+            <div class="logo">焕新图书</div>
+            <div class="menu">
+                <a href="#">首页</a>
+                <a href="#">小说</a>
+                <a href="#">科技</a>
+                <a href="#">历史</a>
+                <a href="#">文学</a>
+            </div>
+            <div class="user-area">
+                <button onclick="openLoginForm()">登录</button>
+                <button class="cart-btn">
+                    <i class="cart-icon">🛒</i> 购物车
+                    <span class="cart-count">0</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="cart-modal" id="cartModal">
+        <div class="close-cart" id="closeCart">×</div>
+        <h3>我的购物车</h3>
+        <div class="cart-items" id="cartItems">
+            <div class="empty-cart">购物车是空的，快去添加图书吧~</div>
+        </div>
+        <div class="cart-total" id="cartTotal">
+            <span>总计：</span>
+            <span>¥0.00</span>
+        </div>
+        <button class="checkout-btn">结算</button>
+    </div>
+    
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="close-btn" onclick="closeLoginForm()">×</div>
+            <div class="form-section">
+                <h3>用户登录</h3>
+                <form action="#" method="post">
+                    <div class="form-group">
+                        <label for="login-account">用户名/邮箱</label>
+                        <input type="text" id="login-account" name="login-account" required placeholder="请输入用户名或邮箱">
+                    </div>
+                    <div class="form-group">
+                        <label for="login-pwd">密码</label>
+                        <input type="password" id="login-pwd" name="login-pwd" required placeholder="请输入密码">
+                    </div>
+                    <div class="form-group">
+                        <label><input type="checkbox" name="remember"> 记住我</label>
+                    </div>
+                    <div class="form-btn-group">
+                        <button type="submit" class="form-btn btn-submit">登录</button>
+                        <button type="button" class="form-btn" onclick="openRegisterForm()">立即注册</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <div class="close-btn" onclick="closeRegisterForm()">×</div>
+            <div class="form-section">
+                <h3>图书推荐订阅（注册）</h3>
+                <form action="#" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="username">用户名</label>
+                        <input type="text" id="username" name="username" required placeholder="请输入用户名">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">邮箱</label>
+                        <input type="email" id="email" name="email" required placeholder="请输入邮箱">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">密码</label>
+                        <input type="password" id="password" name="password" required placeholder="请输入密码">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>性别</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="gender" value="male" checked> 男</label>
+                            <label><input type="radio" name="gender" value="female"> 女</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="city">所在城市</label>
+                        <select id="city" name="city" required>
+                            <option value="">请选择城市</option>
+                            <option value="beijing">北京</option>
+                            <option value="shanghai">上海</option>
+                            <option value="guangzhou">广州</option>
+                            <option value="shenzhen">深圳</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="book-type">感兴趣的图书分类</label>
+                        <select id="book-type" name="book-type" required>
+                            <option value="">请选择分类</option>
+                            <option value="novel">小说</option>
+                            <option value="tech">科技</option>
+                            <option value="history">历史</option>
+                            <option value="literature">文学</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>兴趣标签</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="hobby" value="reading"> 阅读</label>
+                            <label><input type="checkbox" name="hobby" value="writing"> 写作</label>
+                            <label><input type="checkbox" name="hobby" value="collect"> 收藏</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">留言/建议</label>
+                        <textarea id="message" name="message" rows="3" placeholder="请输入您的留言..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="avatar">上传头像</label>
+                        <input type="file" id="avatar" name="avatar" accept="image/*">
+                    </div>
+                    
+                    <div class="form-btn-group">
+                        <button type="submit" class="form-btn btn-submit">提交订阅</button>
+                        <button type="reset" class="form-btn btn-reset">重置表单</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="sidebar">
+            <h3>图书分类导航</h3>
+            <ul>
+                <li><a href="#">小说</a></li>
+                <li><a href="#">历史</a></li>
+                <li><a href="#">文学</a></li>
+                <li><a href="#">艺术</a></li>
+                <li><a href="#">哲学</a></li>
+                <li><a href="#">科技</a></li>
+                <li><a href="#">经济</a></li>
+                <li><a href="#">教育</a></li>
+                <li><a href="#">医学</a></li>
+                <li><a href="#">军事</a></li>
+                <li><a href="#">传记</a></li>
+                <li><a href="#">科普</a></li>
+                <li><a href="#">心理</a></li>
+                <li><a href="#">育儿</a></li>
+                <li><a href="#">职场</a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <p>热门搜索标签：</p>
+                <span class="hot-tag">Python</span>
+                <span class="hot-tag">悬疑小说</span>
+                <span class="hot-tag">历史通史</span>
+                <span class="hot-tag">自我提升</span>
+                <span class="hot-tag">科幻</span>
+                <p>© 2025 焕新图书<br>海量图书，正版保障</p>
+            </div>
+        </div>
+        
+        <div class="main">
+            <div class="search-bar">
+                <input type="text" placeholder="搜索图书名称、作者..." id="searchInput">
+                <button id="searchBtn">
+                    <i class="search-icon">🔍</i> 搜索
+                </button>
+            </div>
+            
+            <div class="search-results" id="searchResults">
+                <p>搜索结果：找到与 "<span id="searchKeyword"></span>" 相关的 <span id="resultCount">0</span> 本图书</p>
+            </div>
+            
+            <div class="banner">
+                <div class="banner-slides" id="bannerSlides">
+                    <div class="banner-slide">
+                        <img src="./微信图片_2025-11-23_101411_689.png" alt="图书促销 banner">
+                        <div class="promo-text">
+                            <h2>书香节狂欢</h2>
+                            <p>全场图书5折起，满200减100，限时3天！</p>
+                        </div>
+                    </div>
+                    <div class="banner-slide">
+                        <img src="./微信图片_2025-11-23_101429_158.png" alt="新书上市 banner">
+                        <div class="promo-text">
+                            <h2>新书上市季</h2>
+                            <p>每月精选50本新书，首发享7折优惠</p>
+                        </div>
+                    </div>
+                    <div class="banner-slide">
+                        <img src="./微信图片_2025-11-23_101440_505.png" alt="会员专享 banner">
+                        <div class="promo-text">
+                            <h2>会员专享</h2>
+                            <p>开通会员每月免费领取2本精选图书</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="banner-controls" id="bannerControls">
+                    <div class="banner-dot active" data-index="0"></div>
+                    <div class="banner-dot" data-index="1"></div>
+                    <div class="banner-dot" data-index="2"></div>
+                </div>
+            </div>
+            
+            <div class="filter">
+                <button class="active">全部图书</button>
+                <button>小说</button>
+                <button>科技</button>
+                <button>历史</button>
+                <button>文学</button>
+                <button>艺术</button>
+                <button>哲学</button>
+            </div>
+            
+            <div class="new-books">
+                <h3>新书上市 <a href="#">查看更多→</a></h3>
+                <div class="books-list">
+                    <div class="book-item" data-book="1">
+                        <div class="book-img">
+                            <img src="./1763863324857.png" alt="Web开发书籍">
+                        </div>
+                        <div class="book-info">
+                            <h4>零基础入门学习Web开发</h4>
+                            <span class="price">¥59.00</span>
+                        </div>
+                    </div>
+                    <div class="book-item" data-book="2">
+                        <div class="book-img">
+                            <img src="./1763863343808.png" alt="设计思维书籍">
+                        </div>
+                        <div class="book-info">
+                            <h4>设计思维工具手册</h4>
+                            <span class="price">¥45.00</span>
+                        </div>
+                    </div>
+                    <div class="book-item" data-book="3">
+                        <div class="book-img">
+                            <img src="1763863370334.png" alt="数据分析书籍">
+                        </div>
+                        <div class="book-info">
+                            <h4>数据分析基础与案例实战</h4>
+                            <span class="price">¥68.00</span>
+                        </div>
+                    </div>
+                    <div class="book-item" data-book="4">
+                        <div class="book-img">
+                            <img src="./1763863386112.png" alt="历史书籍">
+                        </div>
+                        <div class="book-info">
+                            <h4>全球通史：从史前到现代</h4>
+                            <span class="price">¥79.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="discount">
+            <h3>活动期间优惠</h3>
+            <ul>
+                <li><span class="icon">★</span>全场图书满100减30，满200减80，满300减150，多买多减上不封顶</li>
+                <li><span class="icon">★</span>新用户注册即送20元无门槛优惠券，可与满减叠加使用</li>
+                <li><span class="icon">★</span>每日签到领取10-50积分，100积分可兑换10元优惠券</li>
+                <li><span class="icon">★</span>会员专享8折优惠，每月额外赠送2本精选电子书</li>
+                <li><span class="icon">★</span>购买套装图书额外赠送精美书签+图书专用收纳袋</li>
+            </ul>
+            
+            <div class="promo-cards">
+                <div class="promo-card">
+                    <h4>限时秒杀</h4>
+                    <p>每日10:00-11:00，精选图书9.9元秒杀，每人限1本</p>
+                    <span class="time-limit">今日剩余：3小时25分</span>
+                </div>
+                <div class="promo-card">
+                    <h4>拼团优惠</h4>
+                    <p>3人拼团享6折，5人拼团享5折，邀请好友更划算</p>
+                    <span class="time-limit">活动剩余：7天</span>
+                </div>
+            </div>
+            
+            <div class="promo-book" data-book="5">
+                <img src="./1763863404234.png" alt="瓦尔登湖促销">
+                <div class="info">
+                    <h4>瓦尔登湖</h4>
+                    <span class="price">¥2.98</span>
+                    <span class="origin-price">¥8.80</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" id="bookModal">
+        <div class="modal-content">
+            <div class="close-btn" id="closeModal">×</div>
+            <div class="book-detail" id="bookDetail">
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let activeModal = null;
+
+        function openLoginForm() {
+            const modal = document.getElementById('loginModal');
+            modal.classList.add('active');
+            activeModal = modal;
+            document.body.classList.add('modal-open');
+        }
+
+        function closeLoginForm() {
+            const modal = document.getElementById('loginModal');
+            modal.classList.remove('active');
+            activeModal = null;
+            document.body.classList.remove('modal-open');
+        }
+
+        function openRegisterForm() {
+            closeLoginForm();
+            const modal = document.getElementById('registerModal');
+            modal.classList.add('active');
+            activeModal = modal;
+            document.body.classList.add('modal-open');
+        }
+
+        function closeRegisterForm() {
+            const modal = document.getElementById('registerModal');
+            modal.classList.remove('active');
+            activeModal = null;
+            document.body.classList.remove('modal-open');
+        }
+
+        function openBookModal(bookId) {
+            const modal = document.getElementById('bookModal');
+            const detailContainer = document.getElementById('bookDetail');
+            const book = bookData[bookId];
+            if (book) {
+                detailContainer.innerHTML = `
+                    <div class="detail-img">
+                        <img src="${book.img}" alt="${book.title}">
+                    </div>
+                    <div class="detail-info">
+                        <h2>${book.title}</h2>
+                        <span class="author">作者：${book.author}</span>
+                        <span class="price">${book.price}</span>
+                        <p class="desc">${book.desc}</p>
+                        <button class="buy-btn" onclick="addToCart('${bookId}')">加入购物车</button>
+                    </div>
+                `;
+                modal.classList.add('active');
+                activeModal = modal;
+                document.body.classList.add('modal-open');
+            }
+        }
+
+        function closeBookModal() {
+            const modal = document.getElementById('bookModal');
+            modal.classList.remove('active');
+            activeModal = null;
+            document.body.classList.remove('modal-open');
+        }
+
+        document.querySelector('.cart-btn').addEventListener('click', () => {
+            const cartModal = document.getElementById('cartModal');
+            cartModal.classList.add('active');
+            activeModal = cartModal;
+            document.body.classList.add('modal-open');
+        });
+
+        document.getElementById('closeCart').addEventListener('click', () => {
+            const cartModal = document.getElementById('cartModal');
+            cartModal.classList.remove('active');
+            activeModal = null;
+            document.body.classList.remove('modal-open');
+        });
+
+        document.querySelectorAll('.modal, .cart-modal').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    if (modal.id === 'cartModal') {
+                        modal.classList.remove('active');
+                    } else {
+                        modal.classList.remove('active');
+                    }
+                    activeModal = null;
+                    document.body.classList.remove('modal-open');
+                }
+            });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && activeModal) {
+                activeModal.classList.remove('active');
+                activeModal = null;
+                document.body.classList.remove('modal-open');
+            }
+        });
+
+        const bookData = {
+            1: {
+                title: "零基础入门学习Web开发",
+                author: "张三",
+                price: "¥59.00",
+                desc: "本书从HTML、CSS基础开始，逐步深入到JavaScript、React等前端技术，通过大量实战案例帮助零基础读者快速掌握Web开发技能。适合大学生、转行人员及编程爱好者阅读。",
+                img: "./1763863324857.png"
+            },
+            2: {
+                title: "设计思维工具手册",
+                author: "李四",
+                price: "¥45.00",
+                desc: "设计思维是创新的核心方法，本书系统介绍了设计思维的五大阶段及常用工具，通过企业案例解析如何运用设计思维解决商业问题，提升产品竞争力。",
+                img: "./1763863343808.png"
+            },
+            3: {
+                title: "数据分析基础与案例实战",
+                author: "王五",
+                price: "¥68.00",
+                desc: "涵盖Python数据分析库（Pandas、Matplotlib等）的使用方法，结合电商、金融等行业案例，讲解数据清洗、可视化、建模全流程，让读者具备实战能力。",
+                img: "1763863370334.png"
+            },
+            4: {
+                title: "全球通史：从史前到现代",
+                author: "赵六",
+                price: "¥79.00",
+                desc: "以全球视角梳理人类文明发展脉络，分析各大文明的兴衰与互动，帮助读者理解历史规律与当代世界格局的形成，是一部兼具学术性与可读性的通史著作。",
+                img: "./1763863386112.png"
+            },
+            5: {
+                title: "瓦尔登湖",
+                author: "梭罗",
+                price: "¥2.98",
+                desc: "梭罗独居瓦尔登湖畔两年的生活记录，探讨自然、简朴与精神自由的关系，文字清新隽永，充满哲思，是美国文学及自然主义的经典之作。",
+                img: "./1763863404234.png"
+            }
+        };
+
+        let cart = [];
+
+        function addToCart(bookId) {
+            const book = bookData[bookId];
+            if (book) {
+                const existingItem = cart.find(item => item.id === bookId);
+                if (existingItem) {
+                    existingItem.quantity++;
+                } else {
+                    cart.push({
+                        id: bookId,
+                        title: book.title,
+                        price: book.price,
+                        img: book.img,
+                        quantity: 1
+                    });
+                }
+                updateCart();
+                closeBookModal();
+                alert('已添加到购物车！');
+            }
+        }
+
+        function updateCart() {
+            const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+            const cartCount = document.querySelector('.cart-count');
+            
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCount.textContent = totalItems;
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<div class="empty-cart">购物车是空的，快去添加图书吧~</div>';
+                cartTotal.innerHTML = '<span>总计：</span><span>¥0.00</span>';
+                return;
+            }
+            
+            let html = '';
+            let total = 0;
+            
+            cart.forEach(item => {
+                const price = parseFloat(item.price.replace('¥', ''));
+                const itemTotal = price * item.quantity;
+                total += itemTotal;
+                
+                html += `
+                    <div class="cart-item">
+                        <img src="${item.img}" alt="${item.title}">
+                        <div class="cart-item-info">
+                            <h4>${item.title}</h4>
+                            <div class="cart-item-price">${item.price} × ${item.quantity}</div>
+                        </div>
+                        <div class="cart-item-remove" onclick="removeFromCart('${item.id}')">×</div>
+                    </div>
+                `;
+            });
+            
+            cartItems.innerHTML = html;
+            cartTotal.innerHTML = `<span>总计：</span><span>¥${total.toFixed(2)}</span>`;
+        }
+
+        function removeFromCart(bookId) {
+            cart = cart.filter(item => item.id !== bookId);
+            updateCart();
+        }
+
+        let currentSlide = 0;
+        const slides = document.getElementById('bannerSlides');
+        const dots = document.querySelectorAll('.banner-dot');
+        const slideCount = dots.length;
+
+        function goToSlide(index) {
+            currentSlide = index;
+            slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+            slides.style.webkitTransform = `translateX(-${currentSlide * 100}%)`;
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentSlide);
+            });
+        }
+
+        let slideInterval = setInterval(() => {
+            currentSlide = (currentSlide + 1) % slideCount;
+            goToSlide(currentSlide);
+        }, 5000);
+
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                clearInterval(slideInterval);
+                goToSlide(parseInt(dot.getAttribute('data-index')));
+                slideInterval = setInterval(() => {
+                    currentSlide = (currentSlide + 1) % slideCount;
+                    goToSlide(currentSlide);
+                }, 5000);
+            });
+        });
+
+        document.getElementById('searchBtn').addEventListener('click', performSearch);
+        document.getElementById('searchInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') performSearch();
+        });
+
+        function performSearch() {
+            const input = document.getElementById('searchInput');
+            const keyword = input.value.trim().toLowerCase();
+            const resultsEl = document.getElementById('searchResults');
+            const keywordEl = document.getElementById('searchKeyword');
+            const countEl = document.getElementById('resultCount');
+            
+            if (keyword === '') {
+                resultsEl.classList.remove('active');
+                return;
+            }
+            
+            let count = 0;
+            Object.values(bookData).forEach(book => {
+                if (book.title.toLowerCase().includes(keyword) || 
+                    book.author.toLowerCase().includes(keyword) ||
+                    book.desc.toLowerCase().includes(keyword)) {
+                    count++;
+                }
+            });
+            
+            keywordEl.textContent = keyword;
+            countEl.textContent = count;
+            resultsEl.classList.add('active');
+        }
+
+        document.querySelectorAll('.book-item, .promo-book').forEach(item => {
+            item.addEventListener('click', () => {
+                const bookId = item.getAttribute('data-book');
+                openBookModal(bookId);
+            });
+        });
+
+        document.getElementById('closeModal').addEventListener('click', closeBookModal);
+
+        document.querySelectorAll('.filter button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter button').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+
+        updateCart();
+
+        (function() {
+            const registerModal = document.getElementById('registerModal');
+            const modalContent = registerModal.querySelector('.modal-content');
+            let startY = 0;
+            let moveY = 0;
+            let isDragging = false;
+            const threshold = 80;
+
+            modalContent.addEventListener('touchstart', (e) => {
+                if (registerModal.classList.contains('active')) {
+                    startY = e.touches[0].clientY;
+                    isDragging = true;
+                    modalContent.style.transition = 'none';
+                }
+            }, { passive: true });
+
+            modalContent.addEventListener('touchmove', (e) => {
+                if (isDragging && registerModal.classList.contains('active')) {
+                    moveY = e.touches[0].clientY - startY;
+                    if (moveY > 0) {
+                        modalContent.style.transform = `translateY(${moveY * 0.8}px)`;
+                        registerModal.style.background = `rgba(0,0,0,${0.5 - moveY / 500})`;
+                    }
+                }
+            }, { passive: true });
+
+            modalContent.addEventListener('touchend', () => {
+                if (isDragging && registerModal.classList.contains('active')) {
+                    modalContent.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+                    registerModal.style.transition = 'background 0.3s ease';
+                    if (moveY >= threshold) {
+                        closeRegisterForm();
+                    } else {
+                        modalContent.style.transform = 'translateY(0)';
+                        registerModal.style.background = 'rgba(0,0,0,0.5)';
+                    }
+                    startY = 0;
+                    moveY = 0;
+                    isDragging = false;
+                }
+            });
+
+            modalContent.addEventListener('mousedown', (e) => {
+                if (registerModal.classList.contains('active') && e.target === modalContent) {
+                    startY = e.clientY;
+                    isDragging = true;
+                    modalContent.style.transition = 'none';
+                }
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (isDragging && registerModal.classList.contains('active')) {
+                    moveY = e.clientY - startY;
+                    if (moveY > 0) {
+                        modalContent.style.transform = `translateY(${moveY * 0.8}px)`;
+                        registerModal.style.background = `rgba(0,0,0,${0.5 - moveY / 500})`;
+                    }
+                }
+            });
+
+            document.addEventListener('mouseup', () => {
+                if (isDragging && registerModal.classList.contains('active')) {
+                    modalContent.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+                    registerModal.style.transition = 'background 0.3s ease';
+                    if (moveY >= threshold) {
+                        closeRegisterForm();
+                    } else {
+                        modalContent.style.transform = 'translateY(0)';
+                        registerModal.style.background = 'rgba(0,0,0,0.5)';
+                    }
+                    startY = 0;
+                    moveY = 0;
+                    isDragging = false;
+                }
+            });
+
+            modalContent.querySelectorAll('input, select, textarea, button').forEach(el => {
+                el.addEventListener('touchstart', (e) => {
+                    isDragging = false;
+                });
+                el.addEventListener('mousedown', (e) => {
+                    isDragging = false;
+                });
+            });
+        })();
+    </script>
+</body>
+</html>
