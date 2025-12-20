@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>焕新数字图书展销平台</title>
+    <link rel="stylesheet" href="9.css">
+</head>
+<body>
+    <div class="header">
+        <div class="nav">
+            <div class="logo">焕新图书</div>
+            <!-- 实时时间显示 -->
+            <div class="current-time" id="currentTime"></div>
+            <div class="menu">
+                <a href="#">首页</a>
+                <a href="#">小说</a>
+                <a href="#">科技</a>
+                <a href="#">历史</a>
+                <a href="#">文学</a>
+            </div>
+            <div class="user-area">
+                <button onclick="openLoginForm()">登录</button>
+                <button class="cart-btn" id="cartBtn">
+                    <i class="cart-icon">🛒</i> 购物车
+                    <span class="cart-count">0</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="cart-modal" id="cartModal">
+        <div class="close-cart" id="closeCart">×</div>
+        <h3>我的购物车</h3>
+        <div class="cart-items" id="cartItems">
+            <div class="empty-cart">购物车是空的，快去添加图书吧~</div>
+        </div>
+        <div class="cart-total" id="cartTotal">
+            <span>总计：</span>
+            <span>¥0.00</span>
+        </div>
+        <button class="checkout-btn">结算</button>
+    </div>
+    
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="close-btn" onclick="closeLoginForm()">×</div>
+            <div class="form-section">
+                <h3>用户登录</h3>
+                <form action="#" method="post" onsubmit="return validateLoginForm()">
+                    <div class="form-group">
+                        <label for="login-account">用户名/邮箱/手机号</label>
+                        <input type="text" id="login-account" name="login-account" required placeholder="请输入用户名、邮箱或手机号" oninput="verifyAccount()">
+                        <span class="verify-tip" id="accountTip"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-pwd">密码</label>
+                        <input type="password" id="login-pwd" name="login-pwd" required placeholder="请输入密码（6-16位）" oninput="checkPwdStrength(this.value)">
+                        <div class="pwd-strength" id="pwdStrength">
+                            <span class="strength-item"></span>
+                            <span class="strength-item"></span>
+                            <span class="strength-item"></span>
+                            <span class="strength-text">密码强度</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label><input type="checkbox" name="remember"> 记住我</label>
+                    </div>
+                    <div class="form-btn-group">
+                        <button type="submit" class="form-btn btn-submit">登录</button>
+                        <button type="button" class="form-btn" onclick="openRegisterForm()">立即注册</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <div class="close-btn" onclick="closeRegisterForm()">×</div>
+            <div class="form-section">
+                <h3>图书推荐订阅（注册）</h3>
+                <form action="#" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="username">用户名</label>
+                        <input type="text" id="username" name="username" required placeholder="请输入用户名">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">邮箱</label>
+                        <input type="email" id="email" name="email" required placeholder="请输入邮箱">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">密码</label>
+                        <input type="password" id="password" name="password" required placeholder="请输入密码">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>性别</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="gender" value="male" checked> 男</label>
+                            <label><input type="radio" name="gender" value="female"> 女</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="city">所在城市</label>
+                        <select id="city" name="city" required>
+                            <option value="">请选择城市</option>
+                            <option value="beijing">北京</option>
+                            <option value="shanghai">上海</option>
+                            <option value="guangzhou">广州</option>
+                            <option value="shenzhen">深圳</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="book-type">感兴趣的图书分类</label>
+                        <select id="book-type" name="book-type" required>
+                            <option value="">请选择分类</option>
+                            <option value="novel">小说</option>
+                            <option value="tech">科技</option>
+                            <option value="history">历史</option>
+                            <option value="literature">文学</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>兴趣标签</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="hobby" value="reading"> 阅读</label>
+                            <label><input type="checkbox" name="hobby" value="writing"> 写作</label>
+                            <label><input type="checkbox" name="hobby" value="collect"> 收藏</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">留言/建议</label>
+                        <textarea id="message" name="message" rows="3" placeholder="请输入您的留言..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="avatar">上传头像</label>
+                        <input type="file" id="avatar" name="avatar" accept="image/*">
+                    </div>
+                    
+                    <div class="form-btn-group">
+                        <button type="submit" class="form-btn btn-submit">提交订阅</button>
+                        <button type="reset" class="form-btn btn-reset">重置表单</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="sidebar">
+            <h3>图书分类导航</h3>
+            <ul>
+                <li><a href="#">小说</a></li>
+                <li><a href="#">历史</a></li>
+                <li><a href="#">文学</a></li>
+                <li><a href="#">艺术</a></li>
+                <li><a href="#">哲学</a></li>
+                <li><a href="#">科技</a></li>
+                <li><a href="#">经济</a></li>
+                <li><a href="#">教育</a></li>
+                <li><a href="#">医学</a></li>
+                <li><a href="#">军事</a></li>
+                <li><a href="#">传记</a></li>
+                <li><a href="#">科普</a></li>
+                <li><a href="#">心理</a></li>
+                <li><a href="#">育儿</a></li>
+                <li><a href="#">职场</a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <p>热门搜索标签：</p>
+                <span class="hot-tag">Python</span>
+                <span class="hot-tag">悬疑小说</span>
+                <span class="hot-tag">历史通史</span>
+                <span class="hot-tag">自我提升</span>
+                <span class="hot-tag">科幻</span>
+                <p>© 2025 焕新图书<br>海量图书，正版保障</p>
+            </div>
+        </div>
+        
+        <div class="main">
+            <!-- 搜索栏 -->
+            <div class="search-bar">
+                <select id="searchType" class="search-filter">
+                    <option value="all">全部</option>
+                    <option value="title">书名</option>
+                    <option value="author">作者</option>
+                    <option value="category">分类</option>
+                </select>
+                <input type="text" placeholder="搜索图书名称、作者、分类..." id="searchInput" autocomplete="off" oninput="showSearchSuggest(this.value)" onblur="hideSearchSuggest()" onfocus="showSearchSuggest(this.value)">
+                <button id="searchBtn" onclick="performSearch()">
+                    <i class="search-icon">🔍</i> 搜索
+                </button>
+                <div class="search-suggest" id="searchSuggest"></div>
+            </div>
+            
+            <div class="search-results" id="searchResults">
+                <p>搜索结果：找到与 "<span id="searchKeyword"></span>" 相关的 <span id="resultCount">0</span> 本图书</p>
+            </div>
+            
+            <!-- 轮播图（移到随机图书上方） -->
+            <div class="banner">
+                <div class="banner-slides" id="bannerSlides">
+                    <div class="banner-slide">
+                        <img src="./微信图片_2025-11-23_101411_689.png" alt="图书促销 banner">
+                        <div class="promo-text">
+                            <h2>书香节狂欢</h2>
+                            <p>全场图书5折起，满200减100，限时3天！</p>
+                        </div>
+                    </div>
+                    <div class="banner-slide">
+                        <img src="./微信图片_2025-11-23_101429_158.png" alt="新书上市 banner">
+                        <div class="promo-text">
+                            <h2>新书上市季</h2>
+                            <p>每月精选50本新书，首发享7折优惠</p>
+                        </div>
+                    </div>
+                    <div class="banner-slide">
+                        <img src="./微信图片_2025-11-23_101440_505.png" alt="会员专享 banner">
+                        <div class="promo-text">
+                            <h2>会员专享</h2>
+                            <p>开通会员每月免费领取2本精选图书</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="banner-controls" id="bannerControls">
+                    <div class="banner-dot active" data-index="0"></div>
+                    <div class="banner-dot" data-index="1"></div>
+                    <div class="banner-dot" data-index="2"></div>
+                </div>
+            </div>
+
+            <!-- 排序筛选栏 -->
+            <div class="sort-filter">
+                <button id="sortPriceAsc">按价格升序</button>
+                <button id="sortPriceDesc">按价格降序</button>
+                <button id="sortScore">按评分排序</button>
+                <label>
+                    <input type="checkbox" id="onlyInStock"> 只看有货
+                </label>
+            </div>
+
+            <!-- 随机图书推荐模块 -->
+            <div class="random-books">
+                <h3>随机图书推荐 
+                    <button id="refreshRandomBtn">换一批</button>
+                </h3>
+                <div class="books-list" id="randomBooksList"></div>
+            </div>
+
+            <!-- 筛选按钮（保留，功能不变） -->
+            <div class="filter">
+                <button class="active" data-filter="all">全部图书</button>
+                <button data-filter="小说">小说</button>
+                <button data-filter="科技">科技</button>
+                <button data-filter="历史">历史</button>
+                <button data-filter="文学">文学</button>
+                <button data-filter="艺术">艺术</button>
+                <button data-filter="哲学">哲学</button>
+            </div>
+        </div>
+        
+        <div class="discount">
+            <!-- 限时抢购模块 -->
+            <h3>限时抢购</h3>
+            <div class="countdown" id="countdown"></div>
+            <div class="book-card promo-book" id="seckillBook" data-book="5"></div>
+
+            <h3>活动期间优惠</h3>
+            <ul>
+                <li><span class="icon">★</span>全场图书满100减30，满200减80，满300减150，多买多减上不封顶</li>
+                <li><span class="icon">★</span>新用户注册即送20元无门槛优惠券，可与满减叠加使用</li>
+                <li><span class="icon">★</span>每日签到领取10-50积分，100积分可兑换10元优惠券</li>
+                <li><span class="icon">★</span>会员专享8折优惠，每月额外赠送2本精选电子书</li>
+                <li><span class="icon">★</span>购买套装图书额外赠送精美书签+图书专用收纳袋</li>
+            </ul>
+            
+            <div class="promo-cards">
+                <div class="promo-card">
+                    <h4>限时秒杀</h4>
+                    <p>每日10:00-11:00，精选图书9.9元秒杀，每人限1本</p>
+                    <span class="time-limit">今日剩余：3小时25分</span>
+                </div>
+                <div class="promo-card">
+                    <h4>拼团优惠</h4>
+                    <p>3人拼团享6折，5人拼团享5折，邀请好友更划算</p>
+                    <span class="time-limit">活动剩余：7天</span>
+                </div>
+            </div>
+            
+            <div class="book-card promo-book" data-book="5">
+                <div class="card-front">
+                    <img src="./1763863404234.png" alt="瓦尔登湖促销">
+                    <div class="info">
+                        <h4>瓦尔登湖</h4>
+                        <span class="price">¥2.98</span>
+                        <span class="origin-price">¥8.80</span>
+                    </div>
+                </div>
+                <div class="card-back">
+                    <h4>瓦尔登湖</h4>
+                    <p>作者：梭罗</p>
+                    <p>评分：★★★★★（5.0）</p>
+                    <p>分类：文学</p>
+                    <button class="buy-btn" onclick="addToCart('5')">加入购物车</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <div class="social-icons">
+            <a href="#" class="icon">📱</a>
+            <a href="#" class="icon">🐧</a>
+            <a href="#" class="icon">📘</a>
+            <a href="#" class="icon">📺</a>
+        </div>
+        <p class="copyright">© 2025 焕新数字图书展销平台 | 版权所有</p>
+    </footer>
+    
+    <div class="modal" id="bookModal">
+        <div class="modal-content">
+            <div class="close-btn" id="closeModal" onclick="closeBookModal()">×</div>
+            <div class="book-detail" id="bookDetail">
+            </div>
+        </div>
+    </div>
+
+    <script src="9.1.js"></script>
+</body>
+</html>
