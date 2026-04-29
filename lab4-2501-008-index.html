@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>春韵数字展销平台-文艺生活首页</title>
+    <link rel="stylesheet" href="lab4-2501-008-index.css">
+</head>
+<body>
+    <!-- 头部区域 -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">春韵文艺</div>
+
+            <!-- 🔥 中间搜索框 -->
+            <div class="search-box">
+                <input type="text" placeholder="搜索图书、分类、作者..." class="search-input">
+                <button class="search-btn">🔍</button>
+            </div>
+
+            <nav class="nav">
+                <ul>
+                    <li><a href="#">首页</a></li>
+                    <!-- 已删除：文艺分类、新品上架、限时特惠 -->
+                    <li><a href="#">关于我们</a></li>
+                    <li><a id="loginBtn">登录/注册</a></li>
+                    <li><a href="#" class="cart-btn">🛒</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 登录注册弹窗【完全原版 未修改】 -->
+    <div class="login-modal" id="loginModal">
+        <div class="modal-overlay" id="modalOverlay"></div>
+        <div class="modal-box">
+            <span class="close-btn" id="closeBtn">&times;</span>
+
+            <div class="form-box login-form" id="loginForm">
+                <h2>用户登录</h2>
+                <div class="input-group">
+                    <label>用户名</label>
+                    <input type="text" id="loginUser" placeholder="请输入用户名">
+                </div>
+                <div class="input-group">
+                    <label>密码</label>
+                    <input type="password" id="loginPwd" placeholder="请输入密码">
+                </div>
+                <button class="submit-btn" id="loginSubmit">登录</button>
+                <p class="switch-text">没有账号？<a id="toRegister">立即注册</a></p>
+                <p class="tip" id="loginTip"></p>
+            </div>
+
+            <div class="form-box register-form" id="registerForm">
+                <h2>用户注册</h2>
+                <div class="input-group">
+                    <label>用户名</label>
+                    <input type="text" id="regUser" placeholder="请输入用户名">
+                </div>
+                <div class="input-group">
+                    <label>密码</label>
+                    <input type="password" id="regPwd" placeholder="请输入密码">
+                </div>
+                <button class="submit-btn" id="regSubmit">注册</button>
+                <p class="switch-text">已有账号？<a id="toLogin">立即登录</a></p>
+                <p class="tip" id="regTip"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 主体内容 -->
+    <div class="main">
+        <aside class="sidebar-left">
+            <h2 class="category-title">文艺分类</h2>
+            <ul class="category-list">
+                <li class="category-item">
+                    <a href="#">散文</a>
+                    <div class="sub-menu">
+                        <a href="#">抒情散文</a>
+                        <a href="#">哲理散文</a>
+                        <a href="#">旅行散文</a>
+                    </div>
+                </li>
+                <li class="category-item"><a href="#">诗歌</a></li>
+                <li class="category-item"><a href="#">生活美学</a></li>
+                <li class="category-item"><a href="#">心理成长</a></li>
+                <li class="category-item"><a href="#">美食随笔</a></li>
+                <li class="category-item"><a href="#">旅行手记</a></li>
+                <li class="category-item"><a href="#">艺术鉴赏</a></li>
+                <li class="category-item"><a href="#">人文历史</a></li>
+            </ul>
+        </aside>
+
+        <section class="content">
+            <div class="book-section">
+                <h2 class="section-title">热门精选</h2>
+                <div class="book-list">
+                    <div class="book-item">
+                        <img src="./程序设计中的工匠精神、家国情怀与工程伦理学习报告.png" alt="图书封面" class="book-img">
+                        <h3 class="book-name">《人间草木》</h3>
+                        <p class="book-author">汪曾祺</p>
+                        <p class="book-price">¥39.00</p>
+                    </div>
+                    <div class="book-item">
+                        <img src="./程序设计中的工匠精神、家国情怀与工程伦理学习报告 (1).png" alt="图书封面" class="book-img">
+                        <h3 class="book-name">《月亮与六便士》</h3>
+                        <p class="book-author">毛姆</p>
+                        <p class="book-price">¥42.00</p>
+                    </div>
+                    <div class="book-item">
+                        <img src="./程序设计中的工匠精神、家国情怀与工程伦理学习报告 (3).png" alt="图书封面" class="book-img">
+                        <h3 class="book-name">《小王子》</h3>
+                        <p class="book-author">圣埃克苏佩里</p>
+                        <p class="book-price">¥29.00</p>
+                    </div>
+                    <div class="book-item">
+                        <img src="./程序设计中的工匠精神、家国情怀与工程伦理学习报告 (4).png" alt="图书封面" class="book-img">
+                        <h3 class="book-name">《瓦尔登湖》</h3>
+                        <p class="book-author">梭罗</p>
+                        <p class="book-price">¥45.00</p>
+                    </div>
+                    <div class="book-item">
+                        <img src="./程序设计中的工匠精神、家国情怀与工程伦理学习报告 (5).png" alt="图书封面" class="book-img">
+                        <h3 class="book-name">《皮囊》</h3>
+                        <p class="book-author">蔡崇达</p>
+                        <p class="book-price">¥48.00</p>
+                    </div>
+                    <div class="book-item">
+                        <img src="./程序设计中的工匠精神、家国情怀与工程伦理学习报告 (6).png" alt="图书封面" class="book-img">
+                        <h3 class="book-name">《目送》</h3>
+                        <p class="book-author">龙应台</p>
+                        <p class="book-price">¥36.00</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="book-section">
+                <h2 class="section-title">新品上架</h2>
+                <table class="new-book-table">
+                    <thead>
+                        <tr>
+                            <th>图书名称</th>
+                            <th>作者</th>
+                            <th>价格</th>
+                            <th>上市时间</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>《生活是很好玩的》</td>
+                            <td>汪曾祺</td>
+                            <td>¥42.00</td>
+                            <td>2026-01-10</td>
+                        </tr>
+                        <tr>
+                            <td>《时间的答案》</td>
+                            <td>卢思浩</td>
+                            <td>¥46.00</td>
+                            <td>2026-02-18</td>
+                        </tr>
+                        <tr>
+                            <td>《人间值得》</td>
+                            <td>中村恒子</td>
+                            <td>¥39.00</td>
+                            <td>2026-03-05</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <aside class="sidebar-right">
+            <div class="promotion">
+                <h2 class="promotion-title">春日特惠</h2>
+                <!-- 文字在上 -->
+                <div class="promotion-item">
+                    <p class="promotion-desc">满99减25，春日暖心价！</p>
+                </div>
+                <div class="promotion-item">
+                    <p class="promotion-desc">文艺新书6折起！</p>
+                </div>
+                <div class="promotion-item">
+                    <p class="promotion-desc">会员享折上折！</p>
+                </div>
+                <!-- 三张图 上下轮播 在下 -->
+                <div class="carousel">
+                    <img src="./img/Mac安装Watt Toolkit版本说明 (2).png" class="promotion-img carousel-item">
+                    <img src="./img/Mac安装Watt Toolkit版本说明 (3).png" class="promotion-img carousel-item">
+                    <img src="./img/Mac安装Watt Toolkit版本说明 (4).png" class="promotion-img carousel-item">
+                </div>
+            </div>
+
+            <div class="cart-wrap">
+                <h3 class="cart-wrap-title">我的购物车</h3>
+                <div class="cart-box">
+                    <p>暂无选购商品</p>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <footer class="footer">
+        <p>春韵文艺展销平台 &copy; 2026 版权所有</p>
+    </footer>
+
+    <!-- JS 完全你原版 没改一个字 -->
+    <script>
+        const loginBtn = document.getElementById('loginBtn');
+        const loginModal = document.getElementById('loginModal');
+        const closeBtn = document.getElementById('closeBtn');
+        const modalOverlay = document.getElementById('modalOverlay');
+
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const toRegister = document.getElementById('toRegister');
+        const toLogin = document.getElementById('toLogin');
+
+        const loginSubmit = document.getElementById('loginSubmit');
+        const regSubmit = document.getElementById('regSubmit');
+
+        const loginTip = document.getElementById('loginTip');
+        const regTip = document.getElementById('regTip');
+
+        // 打开弹窗
+        loginBtn.onclick = function () {
+            loginModal.style.display = 'block';
+            loginForm.style.display = 'block';
+            registerForm.style.display = 'none';
+            document.body.classList.add('modal-open');
+        };
+
+        // 关闭弹窗
+        function closeModal() {
+            loginModal.style.display = 'none';
+            loginTip.innerText = '';
+            regTip.innerText = '';
+            document.body.classList.remove('modal-open');
+        }
+
+        closeBtn.onclick = closeModal;
+        modalOverlay.onclick = closeModal;
+
+        // 切换登录注册
+        toRegister.onclick = function () {
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'block';
+        };
+        toLogin.onclick = function () {
+            registerForm.style.display = 'none';
+            loginForm.style.display = 'block';
+        };
+
+        // 注册
+        regSubmit.onclick = function () {
+            const username = document.getElementById('regUser').value.trim();
+            const password = document.getElementById('regPwd').value.trim();
+
+            if (!username || !password) {
+                regTip.innerText = '用户名和密码不能为空！';
+                regTip.style.color = 'red';
+                return;
+            }
+
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+            const exists = users.some(u => u.username === username);
+
+            if (exists) {
+                regTip.innerText = '用户名已存在！';
+                regTip.style.color = 'red';
+                return;
+            }
+
+            users.push({ username, password });
+            localStorage.setItem('users', JSON.stringify(users));
+
+            regTip.innerText = '注册成功！正在跳转登录';
+            regTip.style.color = 'green';
+            document.getElementById('regUser').value = '';
+            document.getElementById('regPwd').value = '';
+
+            setTimeout(() => toLogin.click(), 1000);
+        };
+
+        // 登录
+        loginSubmit.onclick = function () {
+            const username = document.getElementById('loginUser').value.trim();
+            const password = document.getElementById('loginPwd').value.trim();
+
+            if (!username || !password) {
+                loginTip.innerText = '用户名和密码不能为空！';
+                loginTip.style.color = 'red';
+                return;
+            }
+
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const user = users.find(u => u.username === username && u.password === password);
+
+            if (user) {
+                loginTip.innerText = '登录成功！欢迎 ' + username;
+                loginTip.style.color = 'green';
+                setTimeout(closeModal, 1500);
+            } else {
+                loginTip.innerText = '用户名或密码错误';
+                loginTip.style.color = 'red';
+            }
+        };
+    </script>
+</body>
+</html>
